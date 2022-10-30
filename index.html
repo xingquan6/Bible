@@ -10,7 +10,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="bible/bibleChaptors.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function () {     
+            var chaptorsTitle = $("#bibleChaptorTitle");       
+            for (let i = 0; i < bibleChaptors.length; i++) {
+                let newChaptorTitle = $("<a>").appendTo(chaptorsTitle);
+                let chaptorTitleText = bibleChaptors[i].FullName;
+                newChaptorTitle.text(chaptorTitleText);
+                newChaptorTitle.attr("id", "ChaptorTitle" + bibleChaptors[i].BibleChaptorId);
+                newChaptorTitle.attr("href", "#Chaptor" + bibleChaptors[i].BibleChaptorId);
+                newChaptorTitle.attr("style", "display:inline-block; margin:5px; padding:0;");
+            };
             var chaptors = $("#bibleChaptor");
             for (let i = 0; i < bibleChaptors.length; i++) {
                 let separator = $("<hr>").appendTo(chaptors);
@@ -30,9 +39,7 @@
                 };
             };
             $('button').on('click', function () {
-                console.log(window.location.href, $(this).attr("class"), this.id);
                 var myWindow = window.open("bible/bible.html#" + this.id, "test", "toolbar=1,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=1,width=800,height=600,left = 240,top = 212");
-                //var myWindow = window.open("bible/bible" + $(this).attr("class") + ".html?printerFriendly=true#" + this.id, "test", "toolbar=1,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=1,width=800,height=600,left = 240,top = 212");
             });
         });
     </script>
@@ -49,6 +56,7 @@
 </head>
 <body>
     <div id="bibleChaptorContainer" class="bibleSection">
+        <div id="bibleChaptorTitle"></div>
         <div id="bibleChaptor"></div>
         <hr>
     </div>

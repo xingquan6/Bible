@@ -25,22 +25,28 @@
                 let separator = $("<hr>").appendTo(chaptors);
                 let newChaptor = $("<div>").appendTo(chaptors);
                 let chaptorText = bibleChaptors[i].FullName + ': ';
-                newChaptor.text(chaptorText);
+                //newChaptor.text(chaptorText);
                 newChaptor.attr("id", "Chaptor" + bibleChaptors[i].BibleChaptorId);
+                let newChaptorTitle = $("<a>").appendTo(newChaptor);
+                newChaptorTitle.text((i+1) + chaptorText);
+                newChaptorTitle.attr("href", "#bibleChaptorTitle");
                 for (let j = 0; j < bibleChaptors[i].TotalChaptors; j++) {
                     let newVerse = $("<button>").appendTo(newChaptor);
                     let verseText = (j + 1) + ' ';
                     newVerse.text(verseText);
                     newVerse.attr("id", "Chaptor" + bibleChaptors[i].BibleChaptorId + '_' + (j + 1));
-                    newVerse.attr("class", bibleChaptors[i].BibleChaptorId);
-                    newVerse.attr("style", "min-width:60px;");
+                    newVerse.attr("class", "btnChaptorDefault");
+                    //newVerse.attr("class", "btnChaptorDefault");
                     //newVerse.attr("href", "bible/bible"+bibleChaptors[i].BibleChaptorId+".html#Chaptor" + bibleChaptors[i].BibleChaptorId + '_' + (j + 1));
                     //newVerse.attr("target", "_blank");
                 };
             };
             $('button').on('click', function () {
+                //$(this).attr("class", "btnChaptorHightLight");
+                $(this).toggleClass('btnChaptorHightLight');
                 var myWindow = window.open("bible/bible.html#" + this.id, "test", "toolbar=1,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=1,width=800,height=600,left = 240,top = 212");
             });
+            
         });
     </script>
     <style>
@@ -51,6 +57,14 @@
         .bibleSection {
             margin: 15px;
             font-size: 0.6em;
+        }
+        .btnChaptorDefault{
+            min-width:60px;
+        }
+        .btnChaptorHightLight{
+            font-weight:bold;
+            font-size:1.25em;
+            min-width:80px;
         }
     </style>
 </head>
